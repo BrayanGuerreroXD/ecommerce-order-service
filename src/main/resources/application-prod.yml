@@ -1,4 +1,0 @@
-# Configuración para entorno de producción
-spring:
-  profiles: prod
-

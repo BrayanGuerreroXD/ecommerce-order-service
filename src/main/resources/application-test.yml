@@ -1,4 +1,0 @@
-# Configuración para entorno de pruebas
-spring:
-  profiles: test
-
