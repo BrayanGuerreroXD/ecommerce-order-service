@@ -42,7 +42,7 @@ public class UserEntity {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @ManyToOne(optional = false, targetEntity = RoleEntity.class, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, targetEntity = RoleEntity.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
     private RoleEntity role;
 

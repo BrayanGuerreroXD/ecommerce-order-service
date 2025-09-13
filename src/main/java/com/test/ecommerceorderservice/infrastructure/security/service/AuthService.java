@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +34,7 @@ public class AuthService {
             throw new NotFoundException(ExceptionCodeEnum.S01LOGN01);
         }
 
-        if (user.getTokenExpiration().isBefore(LocalDateTime.now())) {
+        if (Objects.nonNull(user.getToken()) && user.getTokenExpiration().isBefore(LocalDateTime.now())) {
             throw new UnauthorizedException(ExceptionCodeEnum.S01UNAU08);
         }
 
