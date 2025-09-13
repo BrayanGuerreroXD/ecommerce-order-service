@@ -19,7 +19,7 @@ public class OpenApiConfig {
     public OpenAPI openAPI() {
         Server localServer = new Server();
         localServer.url("http://localhost:7500/api/v1");
-        localServer.setDescription("ITSM Server Url in local environment");
+        localServer.setDescription("Ecommerce Server Url in local environment");
 
         Contact contact = new Contact();
         contact.setEmail("brayanstewartguor@gmail.com");
