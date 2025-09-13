@@ -1,4 +1,4 @@
-package com.test.ecommerceorderservice.infrastructure.security.config;
+package com.test.ecommerceorderservice.configs;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
