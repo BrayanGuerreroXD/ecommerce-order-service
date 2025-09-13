@@ -1,4 +1,4 @@
-package com.test.ecommerceorderservice.domain.model.enums;
+package com.test.ecommerceorderservice.infrastructure.enums;
 
 public enum Role {
     CUSTOMER("ROLE_CUSTOMER"),
@@ -16,4 +16,3 @@ public enum Role {
         return authority;
     }
 }
-
