@@ -29,6 +29,17 @@ public enum ExceptionCodeEnum {
     S01UNAU05("The token is empty", ExceptionEnum.SECURITY_EXCEPTION.getValue()),
     S01UNAU06("The token is not valid", ExceptionEnum.SECURITY_EXCEPTION.getValue()),
 
+    // -------------- Users Exceptions --------------
+    C01USR01("The user was not found", ExceptionEnum.NOT_FOUND_EXCEPTION.getValue()),
+
+    // --------------Roles Exceptions --------------
+    C01ROL01("The role was not found", ExceptionEnum.NOT_FOUND_EXCEPTION.getValue()),
+
+    // -------------- Orders Exceptions --------------
+
+    // -------------- Products Exceptions --------------
+
+
     ;
 
 
