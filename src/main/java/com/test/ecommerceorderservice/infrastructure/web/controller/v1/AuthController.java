@@ -29,7 +29,6 @@ public class AuthController {
         return new DefaultResponse<>(authApplicationService.login(loginRequest));
     }
 
-    /*Metodo utilizado para realizar el cierre de sesion limpiando el token activo de la sesion*/
     @PutMapping(path = "/logout", produces = {MediaType.APPLICATION_JSON_VALUE})
     public DefaultResponse<SuccessResponse> closeSession(HttpServletRequest tokenRequest) {
         return new DefaultResponse<>(authApplicationService.closeSession(tokenRequest));
