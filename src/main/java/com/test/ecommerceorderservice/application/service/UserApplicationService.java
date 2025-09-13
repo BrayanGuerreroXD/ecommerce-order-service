@@ -12,6 +12,7 @@ import com.test.ecommerceorderservice.infrastructure.web.exception.NotFoundExcep
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,17 +22,25 @@ public class UserApplicationService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
+    @Transactional
     public UserResponse createUser(UserCreateRequest request) {
         Role role = roleRepository.findById(request.getRoleId()).orElseThrow(
                 () -> new NotFoundException(ExceptionCodeEnum.C01ROL01)
         );
         String encodedPassword = new BCryptPasswordEncoder().encode(request.getPassword());
-        User user = new User(null, request.getFullName(), encodedPassword, request.getEmail(), role);
+
+        User user = new User();
+        user.setFullName(request.getFullName());
+        user.setEmail(request.getEmail());
+        user.setPassword(encodedPassword);
+        user.setRole(role);
+
         User saved = userRepository.save(user);
 
         return toResponse(saved);
     }
 
+    @Transactional
     public UserResponse updateUser(Long id, UserUpdateRequest request) {
         User user = this.handleGetById(id);
 
@@ -60,6 +69,7 @@ public class UserApplicationService {
         return userRepository.findAll().stream().map(this::toResponse).toList();
     }
 
+    @Transactional
     public boolean deleteUser(Long id) {
         User user = this.handleGetById(id);
         userRepository.deleteById(user.getId());

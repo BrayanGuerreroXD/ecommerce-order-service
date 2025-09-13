@@ -7,13 +7,15 @@ public class UserMapper {
 
     public static User toDomain(UserEntity entity) {
         if (entity == null) return null;
-        return new User(
-                entity.getId(),
-                entity.getFullName(),
-                entity.getPassword(),
-                entity.getEmail(),
-                RoleMapper.toDomainRole(entity.getRole())
-        );
+        User user = new User();
+        user.setId(entity.getId());
+        user.setFullName(entity.getFullName());
+        user.setPassword(entity.getPassword());
+        user.setEmail(entity.getEmail());
+        user.setRole(RoleMapper.toDomainRole(entity.getRole()));
+        user.setToken(entity.getToken());
+        user.setTokenExpiration(entity.getTokenExpiration());
+        return user;
     }
 
     public static UserEntity toEntity(User user) {
@@ -24,6 +26,8 @@ public class UserMapper {
         entity.setPassword(user.getPassword());
         entity.setEmail(user.getEmail());
         entity.setRole(RoleMapper.toEntityRole(user.getRole()));
+        entity.setToken(user.getToken());
+        entity.setTokenExpiration(user.getTokenExpiration());
         return entity;
     }
 }

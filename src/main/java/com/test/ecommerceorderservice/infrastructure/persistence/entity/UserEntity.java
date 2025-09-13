@@ -3,6 +3,7 @@ package com.test.ecommerceorderservice.infrastructure.persistence.entity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,6 +16,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users",
@@ -39,7 +42,11 @@ public class UserEntity {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @ManyToOne
+    @ManyToOne(optional = false, targetEntity = RoleEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", nullable = false)
     private RoleEntity role;
+
+    private String token;
+
+    private LocalDateTime tokenExpiration;
 }

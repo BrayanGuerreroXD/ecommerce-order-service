@@ -28,6 +28,11 @@ public enum ExceptionCodeEnum {
     S01UNAU04("The token is null", ExceptionEnum.SECURITY_EXCEPTION.getValue()),
     S01UNAU05("The token is empty", ExceptionEnum.SECURITY_EXCEPTION.getValue()),
     S01UNAU06("The token is not valid", ExceptionEnum.SECURITY_EXCEPTION.getValue()),
+    S01UNAU07("The token has expired", ExceptionEnum.SECURITY_EXCEPTION.getValue()),
+    S01UNAU08("The user already has an active session", ExceptionEnum.SECURITY_EXCEPTION.getValue()),
+
+    // -------------- Login Exceptions --------------
+    S01LOGN01("Invalid password", ExceptionEnum.SECURITY_EXCEPTION.getValue()),
 
     // -------------- Users Exceptions --------------
     C01USR01("The user was not found", ExceptionEnum.NOT_FOUND_EXCEPTION.getValue()),
