@@ -34,7 +34,7 @@ public class AuthService {
             throw new NotFoundException(ExceptionCodeEnum.S01LOGN01);
         }
 
-        if (Objects.nonNull(user.getToken()) && user.getTokenExpiration().isBefore(LocalDateTime.now())) {
+        if (Objects.nonNull(user.getToken()) && user.getTokenExpiration().isAfter(LocalDateTime.now())) {
             throw new UnauthorizedException(ExceptionCodeEnum.S01UNAU08);
         }
 

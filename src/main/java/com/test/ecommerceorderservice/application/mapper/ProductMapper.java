@@ -11,6 +11,7 @@ public class ProductMapper {
         entity.setId(product.getId());
         entity.setName(product.getName());
         entity.setPrice(product.getPrice());
+        entity.setSku(product.getSku());
         return entity;
     }
 
@@ -20,6 +21,7 @@ public class ProductMapper {
         product.setId(entity.getId());
         product.setName(entity.getName());
         product.setPrice(entity.getPrice());
+        product.setSku(entity.getSku());
         return product;
     }
 }

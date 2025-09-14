@@ -4,6 +4,8 @@ import com.test.ecommerceorderservice.application.dto.request.CreateProductReque
 import com.test.ecommerceorderservice.application.dto.request.UpdateProductRequest;
 import com.test.ecommerceorderservice.application.dto.response.ProductResponse;
 import com.test.ecommerceorderservice.application.service.ProductApplicationService;
+import com.test.ecommerceorderservice.infrastructure.annotation.RoleVerify;
+import com.test.ecommerceorderservice.infrastructure.enums.Role;
 import com.test.ecommerceorderservice.infrastructure.web.dto.DefaultResponse;
 import com.test.ecommerceorderservice.infrastructure.web.dto.SuccessResponse;
 import jakarta.validation.Valid;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RoleVerify(Role.ADMIN)
 @RestController
 @RequestMapping("products")
 @RequiredArgsConstructor
