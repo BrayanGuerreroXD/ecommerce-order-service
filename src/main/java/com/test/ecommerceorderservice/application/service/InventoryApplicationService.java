@@ -105,11 +105,13 @@ public class InventoryApplicationService {
     }
 
     /**
-     * Atomic adjustment that sets the absolute quantity directly (without loading entity).
+     * Fast path for Orders: atomic increase in DB. Returns true if increased (updated==1), false if not found.
+     * Orders should call this method when high concurrency is needed.
      */
     @Transactional
-    public boolean setQuantityAtomic(Long inventoryId, int newQty) {
-        int updated = inventoryRepository.updateQuantity(inventoryId, newQty);
+    public boolean increaseByProduct(Long productId, int newQty) {
+        log.debug("Attempting atomic increase for productId {} setting absolute qty {}", productId, newQty);
+        int updated = inventoryRepository.increaseByProduct(productId, newQty);
         return updated == 1;
     }
 

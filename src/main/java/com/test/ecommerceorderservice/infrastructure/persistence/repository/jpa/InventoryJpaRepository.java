@@ -34,4 +34,9 @@ public interface InventoryJpaRepository extends JpaRepository<InventoryEntity, L
     @Query("UPDATE InventoryEntity i SET i.quantity = i.quantity - :qty WHERE i.product.id = :productId AND i.quantity >= :qty")
     int decreaseIfEnough(@Param("productId") Long productId, @Param("qty") int qty);
 
+    @Modifying
+    @Transactional
+    @Query("UPDATE InventoryEntity i SET i.quantity = i.quantity + :qty WHERE i .product.id = :productId")
+    int increaseByProduct(@Param("productId") Long productId, @Param("qty") int qty);
+
 }

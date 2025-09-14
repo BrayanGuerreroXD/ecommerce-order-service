@@ -41,6 +41,11 @@ public enum ExceptionCodeEnum {
     C01ROL01("The role was not found", ExceptionEnum.NOT_FOUND_EXCEPTION.getValue()),
 
     // -------------- Orders Exceptions --------------
+    C01ORD01("The order was not found", ExceptionEnum.NOT_FOUND_EXCEPTION.getValue()),
+    C01ORD02("The order cannot be paid because its status is not 'CREATED'", ExceptionEnum.REQUEST_EXCEPTION.getValue()),
+    C01ORD03("The order cannot be created because there is not enough stock", ExceptionEnum.REQUEST_EXCEPTION.getValue()),
+    C01ORD04("The user is not authorized to access this order", ExceptionEnum.SECURITY_EXCEPTION.getValue()),
+    C01ORD05("The order cannot be cancelled because its status is 'PAID'", ExceptionEnum.REQUEST_EXCEPTION.getValue()),
 
     // -------------- Products Exceptions --------------
     C01PRD01("The product was not found", ExceptionEnum.NOT_FOUND_EXCEPTION.getValue()),

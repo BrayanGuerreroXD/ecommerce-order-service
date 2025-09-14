@@ -63,6 +63,12 @@ public class InventoryRepositoryAdapter implements InventoryRepository {
 
     @Override
     @Transactional
+    public int increaseByProduct(Long productId, Integer quantity) {
+        return inventoryJpaRepository.increaseByProduct(productId, quantity);
+    }
+
+    @Override
+    @Transactional
     public void deleteById(Long id) {
         inventoryJpaRepository.deleteById(id);
     }

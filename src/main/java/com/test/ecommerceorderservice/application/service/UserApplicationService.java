@@ -65,6 +65,10 @@ public class UserApplicationService {
         return toResponse(user);
     }
 
+    public User getUserModelById(Long id) {
+        return this.handleGetById(id);
+    }
+
     public List<UserResponse> getAllUsers() {
         return userRepository.findAll().stream().map(this::toResponse).toList();
     }
