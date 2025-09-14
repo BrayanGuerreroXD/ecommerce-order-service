@@ -6,11 +6,9 @@ import com.test.ecommerceorderservice.application.dto.response.ProductResponse;
 import com.test.ecommerceorderservice.domain.model.Product;
 import com.test.ecommerceorderservice.domain.repository.ProductRepository;
 import com.test.ecommerceorderservice.infrastructure.enums.exceptions.ExceptionCodeEnum;
-import com.test.ecommerceorderservice.infrastructure.web.dto.SuccessResponse;
 import com.test.ecommerceorderservice.infrastructure.web.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -75,17 +73,6 @@ public class ProductApplicationService {
     public List<ProductResponse> getAllProducts() {
         log.info("Fetching all products");
         return productRepository.findAll().stream().map(this::toResponse).toList();
-    }
-
-    @Transactional
-    @CacheEvict(value = CACHE, key = "#id")
-    public SuccessResponse deleteProduct(Long id) {
-        log.info("Deleting product with id: {}", id);
-        Product product = productRepository.findById(id).orElseThrow(
-                () -> new BadRequestException(ExceptionCodeEnum.C01PRD01)
-        );
-        productRepository.deleteById(product.getId());
-        return new SuccessResponse(true);
     }
 
     public Product getProductModelById(Long id) {

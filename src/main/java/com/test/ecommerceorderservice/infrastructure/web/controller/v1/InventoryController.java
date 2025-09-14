@@ -12,7 +12,6 @@ import com.test.ecommerceorderservice.shared.dto.request.FilterRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,12 +58,6 @@ public class InventoryController {
             @RequestBody @Valid UpdateInventoryQuantityRequest req
     ) {
         inventoryApplicationService.updateInventoryQuantity(inventoryId, req.getQuantity());
-        return new DefaultResponse<>(new SuccessResponse(true));
-    }
-
-    @DeleteMapping("/{inventoryId}")
-    public DefaultResponse<SuccessResponse> deleteInventory(@PathVariable Long inventoryId) {
-        inventoryApplicationService.deleteInventoryById(inventoryId);
         return new DefaultResponse<>(new SuccessResponse(true));
     }
 

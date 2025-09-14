@@ -68,12 +68,6 @@ public class InventoryRepositoryAdapter implements InventoryRepository {
     }
 
     @Override
-    @Transactional
-    public void deleteById(Long id) {
-        inventoryJpaRepository.deleteById(id);
-    }
-
-    @Override
     public boolean existsByProductId(Long productId) {
         return inventoryJpaRepository.existsByProductId(productId);
     }

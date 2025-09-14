@@ -115,19 +115,6 @@ public class InventoryApplicationService {
         return updated == 1;
     }
 
-    @Transactional
-    public void deleteInventoryById(Long inventoryId) {
-        log.info("Deleting inventory with id: {}", inventoryId);
-        this.validateInventoryExists(inventoryId);
-        inventoryRepository.deleteById(inventoryId);
-    }
-
-    private void validateInventoryExists(Long inventoryId) {
-        if (!inventoryRepository.existsById(inventoryId)) {
-            throw new BadRequestException(ExceptionCodeEnum.C01INV01);
-        }
-    }
-
     private void sleepBackoff(int attempt) {
         try {
             long BASE_BACKOFF_MS = 100L;

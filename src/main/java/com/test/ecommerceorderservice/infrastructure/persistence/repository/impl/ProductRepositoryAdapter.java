@@ -41,10 +41,4 @@ public class ProductRepositoryAdapter implements ProductRepository {
     public List<Product> findAll() {
         return productJpaRepository.findAll().stream().map(ProductMapper::toDomain).toList();
     }
-
-    @Override
-    @Transactional
-    public void deleteById(Long id) {
-        productJpaRepository.deleteById(id);
-    }
 }

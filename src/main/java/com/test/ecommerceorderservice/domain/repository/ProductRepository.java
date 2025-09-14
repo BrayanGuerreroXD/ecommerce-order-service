@@ -10,6 +10,5 @@ public interface ProductRepository {
     Optional<Product> findById(Long id);
     Optional<Product> findBySku(String sku);
     List<Product> findAll();
-    void deleteById(Long id);
 }
 

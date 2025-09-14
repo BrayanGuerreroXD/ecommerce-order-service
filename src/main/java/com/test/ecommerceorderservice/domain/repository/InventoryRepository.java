@@ -14,7 +14,6 @@ public interface InventoryRepository {
     int updateQuantity(Long inventoryId, Integer quantity);
     int decreaseIfEnough(Long productId, Integer quantity);
     int increaseByProduct(Long productId, Integer quantity);
-    void deleteById(Long id);
     boolean existsByProductId(Long productId);
     boolean existsById(Long id);
 }

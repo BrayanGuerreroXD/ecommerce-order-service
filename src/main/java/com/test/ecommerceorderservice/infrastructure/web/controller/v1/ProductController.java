@@ -7,10 +7,8 @@ import com.test.ecommerceorderservice.application.service.ProductApplicationServ
 import com.test.ecommerceorderservice.infrastructure.annotation.RoleVerify;
 import com.test.ecommerceorderservice.infrastructure.enums.Role;
 import com.test.ecommerceorderservice.infrastructure.web.dto.DefaultResponse;
-import com.test.ecommerceorderservice.infrastructure.web.dto.SuccessResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,10 +46,5 @@ public class ProductController {
     @PutMapping("/{id}")
     public DefaultResponse<ProductResponse> update(@PathVariable Long id, @RequestBody @Valid UpdateProductRequest req) {
         return new DefaultResponse<>(productApplicationService.updateProduct(id, req));
-    }
-
-    @DeleteMapping("/{id}")
-    public DefaultResponse<SuccessResponse> delete(@PathVariable Long id) {
-        return new DefaultResponse<>(productApplicationService.deleteProduct(id));
     }
 }
