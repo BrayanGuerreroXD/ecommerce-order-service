@@ -88,6 +88,12 @@ public class ProductApplicationService {
         return new SuccessResponse(true);
     }
 
+    public Product getProductModelById(Long id) {
+        return productRepository.findById(id).orElseThrow(
+                () -> new BadRequestException(ExceptionCodeEnum.C01PRD01)
+        );
+    }
+
     private ProductResponse toResponse(Product product) {
         ProductResponse response = new ProductResponse();
         response.setId(product.getId());

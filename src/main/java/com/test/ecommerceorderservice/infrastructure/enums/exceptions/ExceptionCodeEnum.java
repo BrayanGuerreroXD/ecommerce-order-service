@@ -44,7 +44,12 @@ public enum ExceptionCodeEnum {
 
     // -------------- Products Exceptions --------------
     C01PRD01("The product was not found", ExceptionEnum.NOT_FOUND_EXCEPTION.getValue()),
-    C01PRD02("The product SKU already exists", ExceptionEnum.REQUEST_EXCEPTION.getValue())
+    C01PRD02("The product SKU already exists", ExceptionEnum.REQUEST_EXCEPTION.getValue()),
+
+    // -------------- Inventory Exceptions --------------
+    C01INV01("The inventory was not found", ExceptionEnum.NOT_FOUND_EXCEPTION.getValue()),
+    C01INV02("The inventory for the product already exists", ExceptionEnum.REQUEST_EXCEPTION.getValue()),
+    C01INV03("Too many concurrent updates to the inventory; optimistic locking failed after multiple retries.", ExceptionEnum.REQUEST_EXCEPTION.getValue()),
 
     ;
 

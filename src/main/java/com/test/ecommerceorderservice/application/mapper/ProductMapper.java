@@ -1,5 +1,6 @@
 package com.test.ecommerceorderservice.application.mapper;
 
+import com.test.ecommerceorderservice.application.dto.response.ProductResponse;
 import com.test.ecommerceorderservice.domain.model.Product;
 import com.test.ecommerceorderservice.infrastructure.persistence.entity.ProductEntity;
 
@@ -23,6 +24,16 @@ public class ProductMapper {
         product.setPrice(entity.getPrice());
         product.setSku(entity.getSku());
         return product;
+    }
+
+    public static ProductResponse toResponse(Product product) {
+        if (product == null) return null;
+        ProductResponse response = new ProductResponse();
+        response.setId(product.getId());
+        response.setName(product.getName());
+        response.setPrice(product.getPrice());
+        response.setSku(product.getSku());
+        return response;
     }
 }
 
