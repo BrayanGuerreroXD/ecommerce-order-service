@@ -11,7 +11,6 @@ import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -40,7 +39,4 @@ public class InventoryEntity {
 
     @Column(nullable = false)
     private Integer quantity;
-
-    @Version
-    private Long version;
 }

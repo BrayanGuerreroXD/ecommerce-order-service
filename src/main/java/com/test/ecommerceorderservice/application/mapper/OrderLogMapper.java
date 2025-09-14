@@ -35,7 +35,6 @@ public class OrderLogMapper {
         }
         OrderLogResponse response = new OrderLogResponse();
         response.setId(orderLog.getId());
-        response.setOrder(OrderMapper.toResponse(orderLog.getOrder()));
         response.setDetails(orderLog.getDetails());
         response.setCreatedAt(orderLog.getCreatedAt());
         return response;

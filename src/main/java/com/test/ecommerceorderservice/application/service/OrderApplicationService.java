@@ -54,7 +54,7 @@ public class OrderApplicationService {
             throw new ConflictException(ExceptionCodeEnum.C01ORD03); // out of stock code (add to your enum)
         }
 
-        Double price = product.getPrice() * request.getQuantity();
+            Double price = product.getPrice() * request.getQuantity();
 
         Order order = new Order();
         order.setUser(user);
@@ -75,7 +75,9 @@ public class OrderApplicationService {
                 saved
         ));
 
-        return OrderMapper.toResponse(saved);
+        OrderResponse response = OrderMapper.toResponse(saved);
+        response.setLogs(orderLogApplicationService.findAllOrderLogResponseByOrderId(saved.getId()));
+        return response;
     }
 
     @Transactional
@@ -99,7 +101,9 @@ public class OrderApplicationService {
                 saved
         ));
 
-        return OrderMapper.toResponse(saved);
+        OrderResponse response = OrderMapper.toResponse(saved);
+        response.setLogs(orderLogApplicationService.findAllOrderLogResponseByOrderId(orderId));
+        return response;
     }
 
     @Transactional
@@ -126,7 +130,9 @@ public class OrderApplicationService {
                 saved
         ));
 
-        return OrderMapper.toResponse(saved);
+        OrderResponse response = OrderMapper.toResponse(saved);
+        response.setLogs(orderLogApplicationService.findAllOrderLogResponseByOrderId(orderId));
+        return response;
     }
 
     @Cacheable(value = CACHE, key = "#orderId")

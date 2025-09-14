@@ -18,11 +18,11 @@ public interface InventoryJpaRepository extends JpaRepository<InventoryEntity, L
 
     @Query("""
         SELECT i FROM InventoryEntity i
-        WHERE :search IS NULL
-           OR i.product.name LIKE CONCAT('%', :search, '%')
-           OR i.product.sku LIKE CONCAT('%', :search, '%')
+        WHERE i.product.name LIKE CONCAT('%', :search, '%')
+           OR i.product.sku  LIKE CONCAT('%', :search, '%')
     """)
-    Page<InventoryEntity> findAllWithSearch(String search, Pageable pageable);
+    Page<InventoryEntity> findAllWithSearch(@Param("search") String search, Pageable pageable);
+
 
     @Modifying
     @Transactional

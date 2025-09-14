@@ -3,7 +3,9 @@ package com.test.ecommerceorderservice.infrastructure.interceptor;
 import com.test.ecommerceorderservice.domain.model.User;
 import com.test.ecommerceorderservice.infrastructure.annotation.PublicIngress;
 import com.test.ecommerceorderservice.infrastructure.annotation.RoleVerify;
+import com.test.ecommerceorderservice.infrastructure.enums.exceptions.ExceptionCodeEnum;
 import com.test.ecommerceorderservice.infrastructure.enums.util.PublicPath;
+import com.test.ecommerceorderservice.infrastructure.web.exception.UnauthorizedException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.NotNull;
@@ -50,8 +52,14 @@ public class GenericInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        return Arrays.stream(role.value())
+        boolean isValid = Arrays.stream(role.value())
                 .anyMatch(r -> r.getAuthority().equalsIgnoreCase(user.getRole().getKey()));
+
+        if (!isValid) {
+            throw new UnauthorizedException(ExceptionCodeEnum.S01FORB01);
+        }
+
+        return true;
     }
 
     private PublicIngress getPublicIngress(HandlerMethod handlerMethod) {

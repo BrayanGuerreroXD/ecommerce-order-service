@@ -41,9 +41,13 @@ public class InventoryRepositoryAdapter implements InventoryRepository {
 
     @Override
     public Page<Inventory> findAll(String search, Pageable pageable) {
-        String lowerCaseSearch = (search == null || search.isBlank()) ? null : search.toLowerCase();
-        return inventoryJpaRepository.findAllWithSearch(lowerCaseSearch, pageable)
-                .map(InventoryMapper::toDomain);
+        if (search == null || search.isBlank()) {
+            return inventoryJpaRepository.findAll(pageable)
+                    .map(InventoryMapper::toDomain);
+        } else {
+            return inventoryJpaRepository.findAllWithSearch(search, pageable)
+                    .map(InventoryMapper::toDomain);
+        }
     }
 
     @Override

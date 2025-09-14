@@ -11,5 +11,4 @@ public class Inventory {
     private Long id;
     private Product product;
     private Integer quantity;
-    private Long version;
 }
