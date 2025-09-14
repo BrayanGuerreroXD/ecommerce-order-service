@@ -1,7 +1,9 @@
 package com.test.ecommerceorderservice.infrastructure.persistence.repository.impl;
 
+import com.test.ecommerceorderservice.application.mapper.OrderMapper;
 import com.test.ecommerceorderservice.domain.model.Order;
 import com.test.ecommerceorderservice.domain.repository.OrderRepository;
+import com.test.ecommerceorderservice.infrastructure.persistence.entity.OrderEntity;
 import com.test.ecommerceorderservice.infrastructure.persistence.repository.jpa.OrderJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,26 +20,28 @@ public class OrderRepositoryAdapter implements OrderRepository {
 
     @Override
     public Order save(Order order) {
-        return null;
+        OrderEntity entity = OrderMapper.toEntity(order);
+        OrderEntity savedEntity = orderJpaRepository.save(entity);
+        return OrderMapper.toDomain(savedEntity);
     }
 
     @Override
     public Optional<Order> findById(Long id) {
-        return Optional.empty();
+        return orderJpaRepository.findById(id).map(OrderMapper::toDomain);
     }
 
     @Override
     public Page<Order> findAll(Pageable pageable) {
-        return null;
+        return orderJpaRepository.findAll(pageable).map(OrderMapper::toDomain);
     }
 
     @Override
     public Page<Order> findAllByUserId(Long userId, Pageable pageable) {
-        return null;
+        return orderJpaRepository.findByUserId(userId, pageable).map(OrderMapper::toDomain);
     }
 
     @Override
     public int existsById(Long id) {
-        return 0;
+        return orderJpaRepository.existsById(id) ? 1 : 0;
     }
 }

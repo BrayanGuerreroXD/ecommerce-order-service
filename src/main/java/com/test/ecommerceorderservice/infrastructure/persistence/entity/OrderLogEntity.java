@@ -14,37 +14,32 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
+
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "order_logs")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OrderEntity {
+public class OrderLogEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false, targetEntity = UserEntity.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity user;
+    @ManyToOne(optional = false, targetEntity = OrderEntity.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false)
+    private OrderEntity order;
 
-    @ManyToOne(optional = false, targetEntity = ProductEntity.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private ProductEntity product;
-
-    @Column(nullable = false)
-    private int quantity;
-
-    @Column(name = "total_price", nullable = false)
-    private Double totalPrice;
-
-    @Column(nullable = false)
-    private String status; // CREATED, PAID, CANCELED
+    @Type(JsonType.class)
+    @Column(columnDefinition = "jsonb")
+    private Map<String, Object> details;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;

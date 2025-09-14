@@ -36,6 +36,7 @@ public class OrderApplicationService {
     private final ProductApplicationService productApplicationService;
     private final UserApplicationService userApplicationService;
     private final InventoryApplicationService inventoryService;
+    private final OrderLogApplicationService orderLogApplicationService;
 
     public static final String CACHE = "order";
 
@@ -64,6 +65,9 @@ public class OrderApplicationService {
 
         Order saved = orderRepository.save(order);
 
+        // Save order log
+        orderLogApplicationService.saveOrderLog(saved);
+
         // Publish event asynchronously
         eventPublisher.publish(new OrderStatusChangedEvent(
                 saved.getId(),
@@ -86,6 +90,9 @@ public class OrderApplicationService {
         order.setStatus(OrderStatus.PAID);
         Order saved = orderRepository.save(order);
 
+        // Save order log
+        orderLogApplicationService.saveOrderLog(saved);
+
         eventPublisher.publish(new OrderStatusChangedEvent(
                 saved.getId(),
                 saved.getStatus().name(),
@@ -107,6 +114,9 @@ public class OrderApplicationService {
         order.setStatus(OrderStatus.CANCELED);
         Order saved = orderRepository.save(order);
 
+        // Save order log
+        orderLogApplicationService.saveOrderLog(saved);
+
         // release inventory (increase)
         inventoryService.increaseByProduct(order.getProduct().getId(), order.getQuantity());
 
@@ -122,14 +132,18 @@ public class OrderApplicationService {
     @Cacheable(value = CACHE, key = "#orderId")
     public OrderResponse getOrderById(Long orderId, Long userId) {
         Order order = getOrderValidated(orderId, userId);
-        return OrderMapper.toResponse(order);
+        OrderResponse response = OrderMapper.toResponse(order);
+        response.setLogs(orderLogApplicationService.findAllOrderLogResponseByOrderId(orderId));
+        return response;
     }
 
     @Cacheable(value = CACHE, key = "#orderId")
     public OrderResponse getOrderByIdForAdmin(Long orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new BadRequestException(ExceptionCodeEnum.C01ORD01));
-        return OrderMapper.toResponse(order);
+        OrderResponse response = OrderMapper.toResponse(order);
+        response.setLogs(orderLogApplicationService.findAllOrderLogResponseByOrderId(orderId));
+        return response;
     }
 
     private Order getOrderValidated(Long orderId, Long userId) {
