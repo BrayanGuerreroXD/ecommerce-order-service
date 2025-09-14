@@ -43,7 +43,8 @@ public enum ExceptionCodeEnum {
     // -------------- Orders Exceptions --------------
 
     // -------------- Products Exceptions --------------
-
+    C01PRD01("The product was not found", ExceptionEnum.NOT_FOUND_EXCEPTION.getValue()),
+    C01PRD02("The product SKU already exists", ExceptionEnum.REQUEST_EXCEPTION.getValue())
 
     ;
 

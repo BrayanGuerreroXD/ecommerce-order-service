@@ -7,6 +7,7 @@ import com.test.ecommerceorderservice.infrastructure.persistence.entity.UserEnti
 import com.test.ecommerceorderservice.infrastructure.persistence.repository.jpa.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,7 @@ public class UserRepositoryAdapter implements UserRepository {
     private final UserJpaRepository userJpaRepository;
 
     @Override
+    @Transactional
     public User save(User user) {
         UserEntity entity = UserMapper.toEntity(user);
         UserEntity savedEntity = userJpaRepository.save(entity);
@@ -25,6 +27,7 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
+    @Transactional
     public Optional<User> findById(Long id) {
         return userJpaRepository.findById(id).map(UserMapper::toDomain);
     }
@@ -40,6 +43,7 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         userJpaRepository.deleteById(id);
     }
