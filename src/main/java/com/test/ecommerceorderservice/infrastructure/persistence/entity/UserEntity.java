@@ -16,6 +16,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDateTime;
 
@@ -29,6 +32,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@SQLDelete(sql = "UPDATE users SET delete_at = NOW() WHERE id = ?")
+@SQLRestriction(value = "delete_at IS NULL")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserEntity {
     @Id
@@ -49,4 +54,10 @@ public class UserEntity {
     private String token;
 
     private LocalDateTime tokenExpiration;
+
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    private LocalDateTime deleteAt;
 }
