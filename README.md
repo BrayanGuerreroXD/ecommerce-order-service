@@ -47,6 +47,14 @@ The project structure follows a clear separation of concerns, inspired by hexago
 
 ---
 
+## Database ER Diagram
+
+The following diagram shows the Entity-Relationship (ER) model for the main database tables used in the service:
+
+![Database ER Diagram](src/main/resources/images/ecommerce-mer-diagram.png)
+
+---
+
 ## Testing
 
 Only **unit tests** are provided, focusing on business logic and application services. There are no integration or end-to-end tests included.
