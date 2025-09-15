@@ -47,4 +47,10 @@ public class UserRepositoryAdapter implements UserRepository {
     public void deleteById(Long id) {
         userJpaRepository.deleteById(id);
     }
+
+    @Override
+    @Transactional
+    public void deleteAll() {
+        userJpaRepository.deleteAll();
+    }
 }

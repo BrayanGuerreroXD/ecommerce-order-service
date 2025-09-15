@@ -17,4 +17,12 @@ public class User {
     private Role role;
     private String token;
     private LocalDateTime tokenExpiration;
+
+    public User(Long id, String fullName, String mail, String pass, Role role) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = mail;
+        this.password = pass;
+        this.role = role;
+    }
 }

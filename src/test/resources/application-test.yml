@@ -1,5 +1,0 @@
-# Configuración de pruebas
-spring:
-  datasource:
-    url: jdbc:h2:mem:testdb
-
