@@ -1,7 +1,0 @@
-version: '3.8'
-services:
-  app:
-    image: ecommerce-order-service:test
-    ports:
-      - "8080:8080"
-
