@@ -83,6 +83,7 @@ public class InventoryApplicationService {
 
                 inv.setQuantity(newQuantity);
                 inventoryRepository.save(inv);
+                return;
             } catch (ConcurrencyFailureException ex) {
                 log.warn("Optimistic lock conflict on inventoryId {} attempt {}", inventoryId, attempt);
                 if (attempt >= MAX_RETRIES) {
